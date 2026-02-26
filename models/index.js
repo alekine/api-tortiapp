@@ -1,11 +1,11 @@
-import Datos from "./Datos.models.js";
+import Pedidos from "./Pedidos.models.js";
 import Cuentas from "./Cuentas.models.js";
 import Resenas from "./resena.model.js"
 
 
-export default{
-    Datos,
+export default {
+    Pedidos,
     Cuentas,
-    Resenas,
+    Resenas
 }
 

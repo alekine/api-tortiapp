@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
 
-const cuentas=mongoose.Schema(
+const cuentas = mongoose.Schema(
     {
-        nameFull:String,
-        userName:String,
-        password:String,
-       
+        fullName: String,
+        telefono: Number,
+        password: String,
+        rol: String
     }
 );
 
-const Cuentas=mongoose.model('cuentas',cuentas);
+const Cuentas = mongoose.model('cuentas', cuentas);
 
 export default Cuentas;

@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import routes from "./routes/index.js";
-import routesUsuario from "./routes/Usuarios.routes.js"
+// import routesUsuario from "./routes/Usuarios.routes.js"
 import routesResena from "./routes/resenas.routes.js"
 
 
@@ -13,14 +13,14 @@ dotenv.config();
 
 
 const app = express();
-app.set('port', process.env.PORT || 10000);
+app.set('port', process.env.PORT || 4000);
 
 //conexion a base de datos
-mongoose.Promise=global.Promise;
+mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGODB_URI)
 
-.then(() => console.log('Conectado aL MongoDB Atlas'))
-.catch((error) => console.log(error))
+  .then(() => console.log('Conectado aL MongoDB'))
+  .catch((error) => console.log(error))
 //Listening de puertos
 
 
@@ -28,12 +28,12 @@ app.use(cors());
 
 
 app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 
-app.use("/api",routes);
-app.use("/api",routesResena)
+app.use("/api", routes);
+app.use("/api", routesResena)
 
 
-app.listen(app.get('port'), () => {
-  console.log(`Example app listening on port:` + app.get('port'));
-})
+app.listen(app.get('port'), "0.0.0.0", () => {
+  console.log(`Servidor escuchando en el puerto ${app.get('port')}`);
+});

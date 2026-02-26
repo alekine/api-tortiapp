@@ -1,34 +1,32 @@
-import jwt from "../utils/jwt.js"
+import jwt from "../utils/jwt.js";
 
+export default {
+    asureAuth: async (req, res, next) => {
+        if (!req.headers.authorization) {
+            return res.status(401).send({
+                msg: "No se encontró el token de autorización"
+            });
+        }
 
-export default{
-    asureAuth: async (req, res, next) =>{
-       if(!req.headers.authorization){
-        return res.status(403).send({
-            msg: "la cabecera no tiene la peticion"
-        })
-       }
+        const token = req.headers.authorization.replace("Bearer ", "");
 
-    const token = req.headers.authorization.replace("Bearer ","")
-        try{
+        try {
             const payload = jwt.decoded(token);
-            
-            const {exp} = payload;
+            const { exp } = payload;
 
-            const currentData = new Date().getTime();
+            const currentTime = Date.now() / 1000; // segundos
 
-            if(exp <= currentData){
-                return res.status(400).send({ msg: "el token ha expirado"})
+            if (exp <= currentTime) {
+                return res.status(401).send({ msg: "El token ha expirado" });
             }
 
-        req.usuario=payload;
-        next();
+            req.usuario = payload;
+            next();
 
-        } catch (error){
-            return res.status(400).send({
-                msg: "token no encontrado o no valido"
-            })
+        } catch (error) {
+            return res.status(401).send({
+                msg: "Token no válido"
+            });
         }
     }
-
-}
+};
