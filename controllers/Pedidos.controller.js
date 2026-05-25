@@ -13,7 +13,9 @@ export default {
         direccion,
         horaEntrega,
         ubicacion,
-        estadoPedido
+        estadoPedido,
+        idCliente,
+        telefono
 
       } = req.body;
 
@@ -25,7 +27,9 @@ export default {
         direccion,
         horaEntrega,
         ubicacion,
-        estadoPedido
+        estadoPedido,
+        idCliente,
+        telefono
 
       });
 
@@ -40,47 +44,40 @@ export default {
     }
   },
 
-  // Endpoint Buscar Todos los Pedidos
-  // getPedidos: async (req, res, next) => {
-  //   try {
-  //     const obtener = await Models.Datos.find();
-  //     res.status(200).json(obtener);
-  //   } catch (error) {
-  //     res.status(500).send({
-  //       message: "Error al obtener los datos",
-  //     });
-  //     next(error);
-  //   }
-  // },
-  //pedidos con la fecha de hoy
+
+
+  // get solo pedidos de hoy (filtra)
   getPedidos: async (req, res, next) => {
     try {
-      // Inicio del día
-      const hoy = new Date();
-      hoy.setHours(0, 0, 0, 0);
 
-      //ELIMINAR PEDIDOS ANTERIORES
-      await Models.Pedidos.deleteMany({
-        createdAt: { $lt: hoy }
-      });
+      const ahora = new Date();
 
-      // Inicio del día siguiente
-      const manana = new Date(hoy);
-      manana.setDate(manana.getDate() + 1);
+      const inicioDiaUTC = new Date(Date.UTC(
+        ahora.getUTCFullYear(),
+        ahora.getUTCMonth(),
+        ahora.getUTCDate(),
+        0, 0, 0, 0
+      ));
 
-      // Obtener solo pedidos de hoy
-      const obtener = await Models.Pedidos.find({
+      const finDiaUTC = new Date(Date.UTC(
+        ahora.getUTCFullYear(),
+        ahora.getUTCMonth(),
+        ahora.getUTCDate(),
+        23, 59, 59, 999
+      ));
+
+      const pedidosHoy = await Models.Pedidos.find({
         createdAt: {
-          $gte: hoy,
-          $lt: manana
+          $gte: inicioDiaUTC,
+          $lte: finDiaUTC
         }
       });
 
-      res.status(200).json(obtener);
+      res.status(200).json(pedidosHoy);
 
     } catch (error) {
-      res.status(500).send({
-        message: "Error al obtener los pedidos",
+      res.status(500).json({
+        message: "Error al obtener los pedidos"
       });
       next(error);
     }
@@ -100,40 +97,60 @@ export default {
     }
   },
 
-  // Endpoint Actualizar Pedido
-  putPedido: async (req, res, next) => {
+  //obtener pedido por id del cliente
+  getPedidosPorCliente: async (req, res, next) => {
     try {
-      const {
-        nombreCliente,
-        cantidadTortilla,
-        tamanoTortilla,
-        tipoEntrega,
-        direccion,
-        horaEntrega
 
-      } = req.body;
+      const { idCliente } = req.params;
 
-      const actualizarPedidos = {
-        nombreCliente,
-        cantidadTortilla,
-        tamanoTortilla,
-        tipoEntrega,
-        direccion,
-        horaEntrega
+      if (!idCliente) {
+        return res.status(400).json({
+          message: "El idCliente es obligatorio"
+        });
+      }
 
-      };
+      const pedidos = await Models.Pedidos.find({
+        idCliente: idCliente
+      });
+
+      res.status(200).json(pedidos);
+
+    } catch (error) {
+      res.status(500).send({
+        message: "Error al obtener los pedidos del cliente",
+      });
+      next(error);
+    }
+  },
+
+  // Endpoint Actualizar Pedido
+  actualizarPedido: async (req, res, next) => {
+    try {
+      const { estadoPedido } = req.body;
+
+      if (!estadoPedido) {
+        return res.status(400).json({
+          msg: "estadoPedido es obligatorio"
+        });
+      }
 
       const actualizar = await Models.Pedidos.findByIdAndUpdate(
         req.params.id,
-        actualizarPedidos,
+        { estadoPedido },
         { new: true }
       );
+
+      if (!actualizar) {
+        return res.status(404).json({
+          msg: "Pedido no encontrado"
+        });
+      }
 
       res.status(200).json(actualizar);
 
     } catch (error) {
-      res.status(500).send({
-        message: "Error al actualizar",
+      res.status(500).json({
+        msg: "Error al actualizar"
       });
       next(error);
     }
@@ -154,4 +171,49 @@ export default {
     }
   },
 
+
+  //pedidos anteriores 
+  obtenerPedidosAnteriores: async (req, res, next) => {
+    try {
+
+      const ahora = new Date();
+
+      // 🔥 MISMA LÓGICA UTC
+      const inicioDiaUTC = new Date(Date.UTC(
+        ahora.getUTCFullYear(),
+        ahora.getUTCMonth(),
+        ahora.getUTCDate(),
+        0, 0, 0, 0
+      ));
+
+      const pedidos = await Models.Pedidos.find({
+        createdAt: { $lt: inicioDiaUTC }
+      }).sort({ createdAt: -1 });
+
+      res.status(200).json(pedidos);
+
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        msg: "Error al obtener pedidos anteriores"
+      });
+      next(error);
+    }
+  },
+
+
+  //obtener todas los pedidos
+  obtenerTodosLosPedidos: async (req, res, next) => {
+    try {
+      const obtener = await Models.Pedidos.find();
+      res.status(200).json(obtener);
+    } catch (error) {
+      res.status(500).send({
+        message: "Error al obtener los datos",
+      });
+      next(error);
+    }
+  },
 };
+
+

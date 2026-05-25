@@ -1,0 +1,13 @@
+// {
+//     "type": "service_account",
+//     "project_id": "tortiapp-auth",
+//     "private_key_id": "90b714adaa0431eeace148eb256562c9aa5c8bd0",
+//     "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDsyUTR6MtRxva9\ndhiawU8pwP7bhPGgLGGWfWBAXznrFIIl3L5DIQ0KKUdN6r2kXipVMeKw6Qk4YyuQ\nisk3Jf0Rf0eoJfLSoUgSTFmP+0dgWTpvEtoHFlIQ2PJdf9N0l+v6Y5dXnsC6oeGH\nucdPeRlEtTKKLLwLkmiy3OLC6JsusUQOEuqI5XbgHXpnbNRvbpVY5g1e6JDwoH3E\nNIcQdbekv0HPW2JDBQStPC4p3nR2IaK4H+v7fbdIw/7RGF1a+W4OhD/WYgEBhdwt\nDfF3j6Y/WY3M7zYspo2ya9wL1TfcqGiQEB5U1FfEh8pf5JCC/EOhp3RuDM6pkSc7\nwUQzKSJRAgMBAAECggEANZ+cDgSQHQA3yy7WQh/Cl4RdQyX/mWRLomrY1CMsqOv/\nUGdGEEpJG3K/MupVEccAg8Q1IBbaT3KIAGcpy+s2vVJrji0v6Vr8iSZQxx5jKvLy\nHIrypNW9dpLHCn0jDF3GY3FP6hgp8eosutHMDRex7QEzBZ89Y8p/mvgSg4ztbdxo\nNwZ8ipxHNifE7Ktl/yovfIFeHKg3ByEdKiAyrt+pR9WXvXxNinChK6pUmaDyaGYe\nCC0Dw9LIPJnYJZEKrrF8sPuIFB1u/xrp/ur/A8+ZPMZc2pJrJbqCvIhF/Mq/MAsF\nG6d1x8hafph4jjZv2ISPTb/VSPdqryOw6zkNDOOwZQKBgQD2ODajtrrS592ck6kP\n30gAeehG/HiiFZx5auuIO4WZcV5MeIKXkumBwpLKMtMP6GlUF32MIZAbyfMmsW9q\n6//psKdd34jxxjrhggqRSzyrDVKL3GId3c86V5HdcPaINnESJQzdLYtAB/Mf4wAw\niSjuBoEhDDdy6QQlteZzYZO51QKBgQD2MSDPA7mayBrDaFxJOtt7j0iWwZwOYU6N\nSktMD7PTtmfpnytt9ZhQ+ya/wAMMUiJTvJSg1px9hghvx5FhjcYE1/q2kGvC9jaw\nT+FQqUwV0z+prw2pm6Rr0SjoH+IN5SlXja1PWoDHjHC8BJdx6TMQKF7e10NULdTr\nOMwGS3iojQKBgAGMQOuujmYdBwug8gMjiDRYj9lCZQ+/ywgIYAqvNRvN1qXsbAW/\n6q/iJUIYJ7OF5oOc0jE7VMiX8Gth2i115ln1vlecvCOo913Lj31yV6NLpiUy8Xr2\nlgLr4gLeXu5kSTmv+fC6BJIWerTMnIexlQxKBi3LAd47EMeb6SL4jhExAoGBAMmw\nMcqmqJWPPa28f25W05yEI9mtv2VgfnPt24Xyj0Xwd2zDQ1cQDrq5JmOMsHKVjx2+\nrpyddRK4jYzVl9qtxP4O2oxaAI52GxOSPWpRZ82xhMREbxL2OVtCvRp9lDoB9T6P\nCN6rrDjOa0T9FfzyKS0hhadV/wili3swyqSVi8G5AoGBANsCicc4BeneM/CB+dFd\npL6enjfobOaZSmKFRe3GOolkJnQTo1ljSPvjKGrBGWG3v1H5XBtmr5AYPTNk0rjs\n1YHJBBb/tVkgZNF83I5cotYNN5kHfj3J1DLP6/qKE6J4ta6bJzeZKg0FiRykTSSC\n0OSS5O6PBbFaUxWVBwGK6/KA\n-----END PRIVATE KEY-----\n",
+//     "client_email": "firebase-adminsdk-fbsvc@tortiapp-auth.iam.gserviceaccount.com",
+//     "client_id": "104249905963849458878",
+//     "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+//     "token_uri": "https://oauth2.googleapis.com/token",
+//     "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+//     "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-fbsvc%40tortiapp-auth.iam.gserviceaccount.com",
+//     "universe_domain": "googleapis.com"
+// }

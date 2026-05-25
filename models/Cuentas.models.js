@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const cuentas = mongoose.Schema(
     {
         fullName: String,
-        telefono: Number,
+        telefono: String,
         password: String,
         rol: String
     }

@@ -9,6 +9,8 @@ const pedidos = mongoose.Schema(
         direccion: String,
         horaEntrega: String,
         estadoPedido: String,
+        idCliente: String,
+        telefono: String,
 
         ubicacion: {
             lat: { type: Number },

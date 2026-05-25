@@ -104,31 +104,44 @@ export default {
   },
 
   // Actualizar datos
-  putDatos: async (req, res, next) => {
+  actualizarCuenta: async (req, res, next) => {
     try {
-      const { fullName, direccion, telefono, rol } = req.body;
+      const { password } = req.body;
 
-      const actualizarDatos = {
-        fullName,
-        direccion,
-        telefono,
-        rol
-      };
+      if (!password) {
+        return res.status(400).json({
+          msg: "La contraseña es obligatoria"
+        });
+      }
+
+      const salt = await bcrypt.genSalt(10);
+      const passwordEncriptado = await bcrypt.hash(password, salt);
 
       const actualizar = await Model.Cuentas.findByIdAndUpdate(
         req.params.id,
-        actualizarDatos,
+        { password: passwordEncriptado },
         { new: true }
       );
 
-      res.status(200).json(actualizar);
+      if (!actualizar) {
+        return res.status(404).json({
+          msg: "Cuenta no encontrada"
+        });
+      }
+
+      const { password: _, ...usuarioSeguro } = actualizar.toObject();
+
+      res.status(200).json(usuarioSeguro);
+
     } catch (error) {
-      res.status(500).send({
-        message: "Error al actualizar",
+      console.log(error);
+      res.status(500).json({
+        msg: "Error al actualizar"
       });
       next(error);
     }
   },
+
 
   // Eliminar cuenta
   delDatos: async (req, res, next) => {
